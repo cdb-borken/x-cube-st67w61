@@ -1,31 +1,34 @@
 /**
-  ******************************************************************************
-  * @file    w6x_net.c
-  * @author  ST67 Application Team
-  * @brief   This file provides code for W6x Net API
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    w6x_net.c
+ * @author  ST67 Application Team
+ * @brief   This file provides code for W6x Net API
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 
 /* Includes ------------------------------------------------------------------*/
-#include "w6x_types.h"     /* W6X_ARCH_** */
+#include "w6x_types.h" /* W6X_ARCH_** */
 #if (ST67_ARCH == W6X_ARCH_T01)
 #include <stdio.h>
 #include <string.h>
-#include "w6x_api.h"       /* Prototypes of the functions implemented in this file */
-#include "w61_at_api.h"    /* Prototypes of the functions called by this file */
-#include "w6x_internal.h"
-#include "w61_io.h"        /* Prototypes of the BUS functions to be registered */
+
 #include "common_parser.h" /* Common Parser functions */
+#include "w61_at_api.h"    /* Prototypes of the functions called by this file */
+#include "w61_io.h"        /* Prototypes of the BUS functions to be registered */
+#include "w6x_api.h"       /* Prototypes of the functions implemented in this file */
+#include "w6x_internal.h"
+
+// clang-format off
 
 /* Global variables ----------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -2575,7 +2578,7 @@ static void W6X_Net_Clean_Socket(int32_t sock)
     {
       if (p_net_ctx->Connection[sock].DataAvailableSize == 0U)
       {
-        if (p_net_ctx->Connection[p_net_ctx->Sockets[sock].Number].DataAvailable != NULL)
+        if (p_net_ctx->Connection[sock].DataAvailable != NULL)
         {
           (void)xSemaphoreTake(p_net_ctx->Connection[sock].DataAvailable, (TickType_t)0);
         }
@@ -2612,3 +2615,5 @@ static void W6X_Net_Clean_Socket(int32_t sock)
 /** @} */
 
 #endif /* ST67_ARCH */
+
+// clang-format on
